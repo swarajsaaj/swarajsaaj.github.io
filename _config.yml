@@ -1,0 +1,37 @@
+# Site settings
+title: Curious Thoughts
+url: "http://localhost:4000"    # the protocol and hostname of your site, eg. `http://laobubu.github.io`
+#baseurl: "/" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
+#timezone: Asia/Chongqing
+description: >
+ Thoughts on technology by a Tech Wanderer
+
+# Your information
+email: swarajpalsaaj@yahoo.co.in
+author: Swaraj
+avatar: "/images/swaraj.jpg"
+profile: Curious Techie.
+#twitter_username: twitter_username
+#github_username:  github_username
+
+# Comment Service (Disqus or 多说)
+#  choose one and un-comment the line to active it
+#disqus_shortname: xxx   # get one: https://disqus.com/admin/signup/
+#duoshuo_shortname: xxx  # get one: http://duoshuo.com/create-site/
+
+permalink: /archivers/:title
+gems:
+ - jekyll-paginate
+ - jekyll-gist
+ - jemoji
+
+# Build settings
+paginate: 5
+paginate_path: "page:num"
+
+highlighter: rouge
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
