@@ -1,37 +1,22 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+
 # Site settings
 title: Curious Thoughts
-url: "http://localhost:4000"    # the protocol and hostname of your site, eg. `http://laobubu.github.io`
-#baseurl: "/" # the prefix of your site uri, eg. `/jekyll-theme-EasyBook` or just one slash `/`
-#timezone: Asia/Chongqing
-description: >
- Thoughts on technology by a Tech Wanderer
-
-# Your information
 email: swarajpalsaaj@yahoo.co.in
-author: Swaraj
-avatar: "/images/swaraj.jpg"
-profile: Curious Techie.
-#twitter_username: twitter_username
-#github_username:  github_username
-
-# Comment Service (Disqus or 多说)
-#  choose one and un-comment the line to active it
-#disqus_shortname: xxx   # get one: https://disqus.com/admin/signup/
-#duoshuo_shortname: xxx  # get one: http://duoshuo.com/create-site/
-
-permalink: /archivers/:title
-gems:
- - jekyll-paginate
- - jekyll-gist
- - jemoji
+description: > # this means to ignore newlines until "baseurl:"
+  Tech Thoughts by Swaraj
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+twitter_username: swarajsaaj
+github_username:  swarajsaaj
 
 # Build settings
-paginate: 5
-paginate_path: "page:num"
-
-highlighter: rouge
 markdown: kramdown
-
 kramdown:
   input: GFM
   syntax_highlighter: rouge
