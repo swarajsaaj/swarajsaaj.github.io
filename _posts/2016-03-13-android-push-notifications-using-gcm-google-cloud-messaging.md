@@ -387,7 +387,7 @@ curl -X POST -H &quot;Authorization: key=&lt;YOUR_SERVER_API_KEY&gt;&quot; -H &q
 The device you are running on must have Google Play Services installed.  (i.e. Google Play)
 
 So thats it, we have the notification in our application finally after a long marathon.\\
-![](/images/gcm_notification/gcm-notification-final.PNG){:height="500px"}
+![](/images/gcm_notification/gcm-notification-final.png){:height="500px"}
 
 This was a simple demonstration of how to get started with GCM Push notifications, you can further send messages to topics, create groups for devices etc. You can further <a href="https://developers.google.com/cloud-messaging/topic-messaging" target="_blank">read here</a>.
 
