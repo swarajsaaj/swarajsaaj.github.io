@@ -4,6 +4,8 @@ title: Android Push Notifications using GCM (Google Cloud Messaging)
 date: 2016-03-13 15:23
 author: swarajsaaj
 comments: true
+header_image: /images/gcm_notification/gcm-notification.PNG
+excerpt: Hi, this is my first post as a blogger, in this post I 'll show you how to send push notifications using GCM (Google Cloud messaging) from our HTTP server (or using curl, Postman or any Http Client).
 permalink: posts/android/gcm-notification
 categories: [android]
 ---
@@ -11,7 +13,7 @@ categories: [android]
 
 Hi, this is my first post as a blogger, in this post I 'll show you how to send push notifications using GCM (Google Cloud messaging) from our HTTP server (or using curl, Postman or any Http Client).
 >This post shows the new method which is using <strong>google-services.json</strong>
-&nbsp;
+
 
 Google provides GCM(Google Cloud Messaging) servers that allow sending downstream messages to registered Android devices and upstream messages from Device to Servers.<!--more--> In this post the focus will be only on the former part of sending downstream messages to Device from our server.
 
@@ -33,58 +35,54 @@ So let us get started implementing the Push Notifications in our app. In first s
 <h2><strong>Register the Application  and Generate API Keys</strong></h2>
 We need to register our application and generate the google-services.json which will contain the API keys required.
 
-1.Open <a href="https://developers.google.com/mobile/add">https://developers.google.com/mobile/add</a> to GCM services to our app. Follow these steps to generate the google-services.json file
+1. Open <a href="https://developers.google.com/mobile/add">https://developers.google.com/mobile/add</a> to GCM services to our app. Follow these steps to generate the google-services.json file
 
-2.Click on "Pick a Platform"
-![Pick a platform](/images/gcm_notification/add1.PNG)
+2. Click on "Pick a Platform"\\
+![Pick a platform](/images/gcm_notification/add1.PNG){:width="500px"}
 
-3.Choose "Enable Services for my Android App" (in this case we are doing it for Android)
-![Enable Services](/images/gcm_notification/add2.PNG)
+3. Choose "Enable Services for my Android App" (in this case we are doing it for Android)\\
+![Enable Services](/images/gcm_notification/add2.PNG){:width="500px"}
 
-4.Give your application name in "App name" and the package name for our application in "Android package name", in case you don't know the package name, you can check it in your AndroidManifest.xml file in the first line in manifest tag) and click "Continue and configure services"
-![](/images/gcm_notification/add3.PNG)
+4. Give your application name in "App name" and the package name for our application in "Android package name", in case you don't know the package name, you can check it in your AndroidManifest.xml file in the first line in manifest tag) and click "Continue and configure services"\\
+![](/images/gcm_notification/add3.PNG){:width="500px"}
 
-5.In this screen , you can choose the services which you want to add to enable for the application, Choose "Cloud messaging" as of now.
-![](/images/gcm_notification/add4.PNG)
+5. In this screen , you can choose the services which you want to add to enable for the application, Choose "Cloud messaging" as of now.\\
+![](/images/gcm_notification/add4.PNG){:width="500px"}
 
-6.Okay, we are good with configuration now, Save the "Server API Key" and "Sender ID" at some place, we will need it later.
-![](/images/gcm_notification/add5.PNG)
+6. Okay, we are good with configuration now, Save the "Server API Key" and "Sender ID" at some place, we will need it later.\\
+![](/images/gcm_notification/add5.PNG){:width="500px"}
 
-7.Click "Generate Configuration files"
-Download the "<strong>google-service.json</strong>" file by clicking on "Download google-services.json" button.
+7. Click "Generate Configuration files"
+Download the "<strong>google-service.json</strong>" file by clicking on "Download google-services.json" button.\\
 
-![](/images/gcm_notification/add6.PNG)
+![](/images/gcm_notification/add6.PNG){:width="500px"}
 
 ## **Setting up Android App for receiving the GCM Messages and displaying Notifications**
 
 Guide to set up the Android App (Client Side) for receiving the GCM Push notifications.
 
-1.Create a New Project by going to File-&gt;New-&gt;New Project and make sure to create the app with package name as you gave in last section while obtaining <strong>google-services.json</strong>
+1. Create a New Project by going to File-&gt;New-&gt;New Project and make sure to create the app with package name as you gave in last section while obtaining <strong>google-services.json</strong>
 
-2.Copy<strong> google-services.json</strong> to your project's app/ folder
+2. Copy<strong> google-services.json</strong> to your project's app/ folder
 
-![](/images/gcm_notification/gcm-google-services.PNG)
+    ![](/images/gcm_notification/gcm-google-services.PNG)
 
-3.Add following classpath to your project level build.gradle file
+3. Add following classpath to your project level build.gradle file
 
-{% highlight gradle %}
-classpath 'com.google.gms:google-services:1.5.0-beta2'
-{% endhighlight %}
-
+```gradle
+    classpath 'com.google.gms:google-services:1.5.0-beta2'
+```
 4.Add following dependency to your app level build.gradle file
 
-{% highlight gradle %}
-dependencies {
-   compile &quot;com.google.android.gms:play-services:8.3.0&quot;
-}
-{% endhighlight %}
-
+```gradle
+    dependencies {
+       compile "com.google.android.gms:play-services:8.3.0"
+    }
+```
 5.Apply the google services plugin by adding following line at end of app level build.gradle
-
-
-{% highlight gradle %}
-apply plugin: 'com.google.gms.google-services'
-{% endhighlight %}
+    {% highlight gradle %}
+    apply plugin: 'com.google.gms.google-services'
+    {% endhighlight %}
 
 6.Edit AndroidManifest.xml to add following permissions and Listeners
 
@@ -192,7 +190,7 @@ These 3 services will be implemented in next steps, lets discuss what they are f
 	
 _Lets get our hands on some Java code_ 
 
-  1. Lets create the <strong>RegisterationService.Java</strong> that serves the simple purpose of registering our application and logs a the token against which the device is registered.
+1.Lets create the <strong>RegisterationService.Java</strong> that serves the simple purpose of registering our application and logs a the token against which the device is registered.
 
 ```java
 package com.wordpress.swarajsaaj.app.notificationdemo;
@@ -220,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-2. Create MyInstanceIDListenerService.java as discussed above.
+2.Create MyInstanceIDListenerService.java as discussed above.
 
 ```java
 package com.wordpress.swarajsaaj.app.notificationdemo;
@@ -253,7 +251,7 @@ public class MyInstanceIDListenerService extends InstanceIDListenerService {
 
 The onTokenRefresh() method re registers the application using RegistertionService.java , you may optionally update the token on your server in this part.
 
-3. Create the <strong>MyGcmListenerService.java</strong> for receiving the Push messages.
+3.Create the <strong>MyGcmListenerService.java</strong> for receiving the Push messages.
 
 ```java
 package com.wordpress.swarajsaaj.app.notificationdemo;
@@ -388,8 +386,8 @@ curl -X POST -H &quot;Authorization: key=&lt;YOUR_SERVER_API_KEY&gt;&quot; -H &q
 
 The device you are running on must have Google Play Services installed.  (i.e. Google Play)
 
-So thats it, we have the notification in our application finally after a long marathon.
-![](/images/gcm_notification/gcm-notification-final.PNG)
+So thats it, we have the notification in our application finally after a long marathon.\\
+![](/images/gcm_notification/gcm-notification-final.PNG){:height="500px"}
 
 This was a simple demonstration of how to get started with GCM Push notifications, you can further send messages to topics, create groups for devices etc. You can further <a href="https://developers.google.com/cloud-messaging/topic-messaging" target="_blank">read here</a>.
 
