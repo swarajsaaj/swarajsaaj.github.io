@@ -7,7 +7,7 @@ comments: true
 permalink: posts/android/gcm-notification
 categories: [android]
 ---
-![GCM Notifications](/images/gcm_notification/gcm-notification.png)
+![GCM Notifications](/images/gcm_notification/gcm-notification.PNG)
 
 Hi, this is my first post as a blogger, in this post I 'll show you how to send push notifications using GCM (Google Cloud messaging) from our HTTP server (or using curl, Postman or any Http Client).
 >This post shows the new method which is using <strong>google-services.json</strong>
@@ -21,7 +21,7 @@ GCM Messages can have a  maximum payload data of 4kb, enough to accommodate a N
 
 Let us have a look at the working Architecture:-
 
-![Architecture](/images/gcm_notification/architecture.png)
+![Architecture](/images/gcm_notification/architecture.PNG)
 
 &nbsp;
 
@@ -36,24 +36,24 @@ We need to register our application and generate the google-services.json which 
 1.Open <a href="https://developers.google.com/mobile/add">https://developers.google.com/mobile/add</a> to GCM services to our app. Follow these steps to generate the google-services.json file
 
 2.Click on "Pick a Platform"
-![Pick a platform](/images/gcm_notification/add1.png)
+![Pick a platform](/images/gcm_notification/add1.PNG)
 
 3.Choose "Enable Services for my Android App" (in this case we are doing it for Android)
-![Enable Services](/images/gcm_notification/add2.png)
+![Enable Services](/images/gcm_notification/add2.PNG)
 
 4.Give your application name in "App name" and the package name for our application in "Android package name", in case you don't know the package name, you can check it in your AndroidManifest.xml file in the first line in manifest tag) and click "Continue and configure services"
-![](/images/gcm_notification/add3.png)
+![](/images/gcm_notification/add3.PNG)
 
 5.In this screen , you can choose the services which you want to add to enable for the application, Choose "Cloud messaging" as of now.
-![](/images/gcm_notification/add4.png)
+![](/images/gcm_notification/add4.PNG)
 
 6.Okay, we are good with configuration now, Save the "Server API Key" and "Sender ID" at some place, we will need it later.
-![](/images/gcm_notification/add5.png)
+![](/images/gcm_notification/add5.PNG)
 
 7.Click "Generate Configuration files"
 Download the "<strong>google-service.json</strong>" file by clicking on "Download google-services.json" button.
 
-![](/images/gcm_notification/add6.png)
+![](/images/gcm_notification/add6.PNG)
 
 ## **Setting up Android App for receiving the GCM Messages and displaying Notifications**
 
@@ -63,7 +63,7 @@ Guide to set up the Android App (Client Side) for receiving the GCM Push notific
 
 2.Copy<strong> google-services.json</strong> to your project's app/ folder
 
-![](/images/gcm_notification/gcm-google-services.png)
+![](/images/gcm_notification/gcm-google-services.PNG)
 
 3.Add following classpath to your project level build.gradle file
 
@@ -322,7 +322,7 @@ The onMessageReceived has two arguments String <strong>"from" </strong>and Bundl
 
 sendNotification() method is a simple bare bones method for displaying notifications using NotificationManager.</li>
 	<li>Build and Launch the application using Phone or emulator,  and lets test using <a href="https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en" target="_blank">POSTMAN</a> which allows us making HTTP requests, or you can also send one using cURL using command line.Once you have run the application, the first thing it does is Register the device for a GCM token and Log it in console , here as shown.
-![](/images/gcm_notification/gcm-log.png)
+![](/images/gcm_notification/gcm-log.PNG)
 
 Copy this token , which will be needed while sending the GCM message.Lets understand the JSON payload we are going to send to our device from server
 
@@ -352,12 +352,12 @@ Or if you dont have a backend yet, you can always try out using following method
 
 <strong>Sending Request using POSTMAN,</strong>
 Assuming you have downloaded and installed POSTMAN in chrome, lets use following configuration
-![](/images/gcm_notification/gcm-postman-headers.png)
+![](/images/gcm_notification/gcm-postman-headers.PNG)
 
 
-![](/images/gcm_notification/gcm-postman-body.png)
+![](/images/gcm_notification/gcm-postman-body.PNG)
 If all goes well you will have the notification on your device, and following response to HTTP request
-![](/images/gcm_notification/gcm-postman-response.png)
+![](/images/gcm_notification/gcm-postman-response.PNG)
 
 <strong>Using command line (cURL)</strong>
 
@@ -389,7 +389,7 @@ curl -X POST -H &quot;Authorization: key=&lt;YOUR_SERVER_API_KEY&gt;&quot; -H &q
 The device you are running on must have Google Play Services installed.  (i.e. Google Play)
 
 So thats it, we have the notification in our application finally after a long marathon.
-![](/images/gcm_notification/gcm-notification-final.png)
+![](/images/gcm_notification/gcm-notification-final.PNG)
 
 This was a simple demonstration of how to get started with GCM Push notifications, you can further send messages to topics, create groups for devices etc. You can further <a href="https://developers.google.com/cloud-messaging/topic-messaging" target="_blank">read here</a>.
 
