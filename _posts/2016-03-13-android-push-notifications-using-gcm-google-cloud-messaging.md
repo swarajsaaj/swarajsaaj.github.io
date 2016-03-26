@@ -12,8 +12,8 @@ categories: [android]
 ![GCM Notifications](/images/gcm_notification/gcm-notification.PNG)
 
 Hi, this is my first post as a blogger, in this post I 'll show you how to send push notifications using GCM (Google Cloud messaging) from our HTTP server (or using curl, Postman or any Http Client).
->This post shows the new method which is using <strong>google-services.json</strong>
 
+> This post shows the new method which is using <strong>google-services.json</strong>
 
 Google provides GCM(Google Cloud Messaging) servers that allow sending downstream messages to registered Android devices and upstream messages from Device to Servers.<!--more--> In this post the focus will be only on the former part of sending downstream messages to Device from our server.
 
