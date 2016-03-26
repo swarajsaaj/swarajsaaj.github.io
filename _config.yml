@@ -10,7 +10,7 @@ title: Curious Thoughts
 email: swarajpalsaaj@yahoo.co.in
 description: > # this means to ignore newlines until "baseurl:"
   Tech Thoughts by Swaraj
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/" # the subpath of your site, e.g. /blog
 url: "http://swarajsaaj.github.io" # the base hostname & protocol for your site
 twitter_username: swarajsaaj
 github_username:  swarajsaaj
