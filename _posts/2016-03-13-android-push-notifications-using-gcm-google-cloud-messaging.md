@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Android Push Notifications using GCM (Google Cloud Messaging)
+description: Android Push Notifications using google cloud messaging new way google-services.json gcm
 date: 2016-03-13 15:23
 author: swarajsaaj
 comments: true
