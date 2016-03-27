@@ -172,7 +172,25 @@ pre {
     }
 }
 
+/**
+ * Sidebar
+ */
+.sidebar {
+    max-width: -webkit-calc(#{$content-width}/4);
+    max-width:         calc(#{$content-width}/4);
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    @extend %clearfix;
 
+    @include media-query($on-laptop) {
+        max-width: -webkit-calc(#{$content-width}/4);
+        max-width:         calc(#{$content-width}/4);
+        padding-right: $spacing-unit / 2;
+        padding-left: $spacing-unit / 2;
+    }
+}
 
 /**
  * Clearfix
@@ -210,4 +228,13 @@ pre {
  */
 .excerpt{
     font-size: $small-font-size;
+}
+
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
 }

@@ -1,3 +1,4 @@
+
 <footer class="site-footer">
 
   <div class="wrapper">
@@ -10,27 +11,27 @@
           <li>{{ site.title }}</li>
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
         </ul>
+         <p>{{ site.description }}</p>
+         <p>Powered by Jekyll - Hand Stiched by Swaraj Pal</p>
       </div>
 
       <div class="footer-col footer-col-2">
         <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            {% include icon-github.html username=site.github_username %}
-          </li>
-          {% endif %}
+        Get in Touch :
+ <li><i class="fa fa-github-square"></i><a href="https://github.com/swarajsaaj"> Github (swarajsaaj)</a></li>
 
-          {% if site.twitter_username %}
-          <li>
-            {% include icon-twitter.html username=site.twitter_username %}
-          </li>
-          {% endif %}
+          <li><i class="fa fa-facebook-square"></i><a href="https://www.facebook.com/swarajsaaj?_rdr"> Facebook</a></li>
+
+         <li><i class="fa fa-linkedin-square"></i><a href="https://www.linkedin.com/in/swarajsaaj"> LinkedIn</a></li>
+
         </ul>
       </div>
 
-      <div class="footer-col footer-col-3">
-        <p>{{ site.description }}</p>
+         <div class="footer-col footer-col-3">
+         Recent Posts
+        {% include recent_posts.html %}
       </div>
+
     </div>
 
   </div>

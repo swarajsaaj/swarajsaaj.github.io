@@ -4,6 +4,12 @@ layout: default
 
 <div class="home">
 
+<div style='text-align:center'>
+  <h1 style='color:#08c1c3'> Curious Thoughts</h1>
+  <p>Blog of a Tech Wanderer, in love with developing magic from tech.</p>
+<p>(<a href="https://github.com/swarajsaaj">~swarajsaaj</a>)</p> 
+</div>
+
   <h1 class="page-heading">Posts</h1>
 
   <ul class="post-list">
@@ -16,9 +22,11 @@ layout: default
         </h2>
           <img src="{{ post.header_image }}" /></a>
           <p class="excerpt"> {{ post.excerpt}} 
-          <a class="excerpt" href="{{ post.url | prepend: site.baseurl }}"> <b>Continue Reading-><b></a></p>
+          <a class="excerpt" href="{{ post.url | prepend: site.baseurl }}"> <b>Continue Reading-></b></a></p>
       </li>
     {% endfor %}
   </ul>
+
+
 
 </div>

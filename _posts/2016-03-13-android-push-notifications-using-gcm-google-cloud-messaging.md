@@ -10,8 +10,8 @@ excerpt: Hi, this is my first post as a blogger, in this post I 'll show you how
 permalink: posts/android/gcm-notification
 categories: [android]
 ---
-![GCM Notifications](/images/gcm_notification/gcm-notification.PNG)
 
+# Introduction
 Hi, this is my first post as a blogger, in this post I 'll show you how to send push notifications using GCM (Google Cloud messaging) from our HTTP server (or using curl, Postman or any Http Client).
 
 > This post shows the new method which is using <strong>google-services.json</strong>
@@ -33,7 +33,8 @@ Let me clear a major misconception that GCM Messages are Notifications, but GCM 
 &nbsp;
 
 So let us get started implementing the Push Notifications in our app. In first step we will generate a <strong>Server API Key</strong>, for identifying our server backend , In second step we will generate a device <strong>token</strong> that will be used as an identity for our device for receiving messages.
-<h2><strong>Register the Application  and Generate API Keys</strong></h2>
+
+# **Register the Application  and Generate API Keys**
 We need to register our application and generate the google-services.json which will contain the API keys required.
 
 1. Open <a href="https://developers.google.com/mobile/add">https://developers.google.com/mobile/add</a> to GCM services to our app. Follow these steps to generate the google-services.json file
@@ -58,7 +59,7 @@ Download the "<strong>google-service.json</strong>" file by clicking on "Downloa
 
 ![](/images/gcm_notification/add6.PNG){:width="500px"}
 
-## **Setting up Android App for receiving the GCM Messages and displaying Notifications**
+# **Setting up Android App for receiving the GCM Messages and displaying Notifications**
 
 Guide to set up the Android App (Client Side) for receiving the GCM Push notifications.
 
