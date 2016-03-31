@@ -20,6 +20,7 @@ Google provides GCM(Google Cloud Messaging) servers that allow sending downstrea
 
 GCM Messages can have a  maximum payload data of 4kb, enough to accommodate a Notification Title, the content and an image url and some other internal data that may be needed by the application for performing the required action like synchronizing the data like emails, product list, messages etc.
 
+
 &nbsp;
 
 Let us have a look at the working Architecture:-
@@ -391,9 +392,15 @@ The device you are running on must have Google Play Services installed.  (i.e. 
 So thats it, we have the notification in our application finally after a long marathon.\\
 ![](/images/gcm_notification/gcm-notification-final.png){:height="500px"}
 
+
+
+
 This was a simple demonstration of how to get started with GCM Push notifications, you can further send messages to topics, create groups for devices etc. You can further <a href="https://developers.google.com/cloud-messaging/topic-messaging" target="_blank">read here</a>.
 
+
 Feel free to comment if you find this post useful or have any doubts or issues in setting this up.
+
+# [Download Source Code](https://github.com/swarajsaaj/gcm_notification_demo/archive/master.zip)
 
 ~@swarajsaaj
 
