@@ -22,10 +22,17 @@ exclude: true
         <h2>
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}
         </h2>
-          <img src="{{ post.header_image }}" /></a>
-          <p class="excerpt"> {{ post.excerpt}} 
+        {% if post.header_image %}
+          <img src="{{ post.header_image }}" />
+        {% endif %}
+        </a>
+           <br>  
+                  <p class="excerpt"> {{ post.excerpt}} 
           <a class="excerpt" href="{{ post.url | prepend: site.baseurl }}"> <b>Continue Reading-></b></a></p>
       </li>
+      
+      <hr class="lightgrey">
+
     {% endfor %}
   </ul>
 

@@ -9,7 +9,9 @@ layout: default
   </header>
 
   <div id="main" class="post-content" itemprop="articleBody">
+  {% if page.header_image %}
    <div><img src="{{ page.header_image }}" /></div>
+   {% endif %}
    <br>
    <div id="tableOfContents"></div>
    <br>
