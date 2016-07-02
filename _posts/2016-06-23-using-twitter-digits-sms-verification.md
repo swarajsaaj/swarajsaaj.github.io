@@ -16,119 +16,146 @@ In most of android applications login is an essential feature, and SMS based pho
 
 # Overview
 
-We will need a Single Broadcast Receiver for our Purpose, a listener to connect our receiver and activity and an Activity (or Fragment etc) for responding to the callback when the message is received.
+What [Digits by Twitter](https://fabric.io/kits/android/digits) does is to provide you a screen with where user can enter their phone number and authenticate, Digits automatically reads the SMS received and calls back the callback defined in code to carry on our App flow.
 
-- **SmsReceiver.java** :- This is a broadcast receiver that is called when SMS is received.
-- **SmsListener.java** :- This would be our listener interface that will be passed on to our receiver.
-- **MainActivity.java** :- Our calling code where all the action happens.
-
-![Architecture](/images/otp/architecture.png)
+**Though in this article we will focus only on phone based logins, but remember to check out digits for more features like user graphs, analytics and more**
 
 # Implementation
 
-First of all add the receiver entry for **SMS_RECEIVED** action in our **AndroidManifest.xml**
+There are two ways (easy and a bit less-easy) of integrating Digits in our application:-
+- [Install Digits Kit manually in our app](https://fabric.io/kits/android/digits/install)
+- [Install through Fabric Android Studio Plugin](https://www.fabric.io/downloads/android)
 
-```xml
+I strongly recommend using the second option, install the fabric plugin in android studio if you haven't already. (Just follow instructions on screen, it wont take much time).
 
-    <receiver android:name=".SmsReceiver">
-        <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-         </intent-filter>
-    </receiver>
+Here is an overview of what needs to be done to integrate "Digits" once you have the [IDE plugin](https://www.fabric.io/downloads/android) installed
 
+- Click on Fabric icon in Android Studio toolbar.
+    
+    ![Start](/images/digits/digits1.png)
+
+- The Fabric Window will come up, Click on "Boot" icon to start.
+
+    ![Start](/images/digits/digits2.png){:width="300px"}
+
+- Login using Fabric Account login, or create an account.
+    
+- Select the main application (name of your app) and click "Next"
+
+     ![Start](/images/digits/digits3.png){:width="300px"}
+- Select Organization.
+- Then you can see all the Kits available by Fabric, select "Digits" and click the next(>) arrow.
+
+     ![Start](/images/digits/digits4.png){:width="300px"}
+- Click on Install Button to automatically setup the codebase in your app.
+
+     ![Start](/images/digits/digits5.png){:width="300px"}
+- Click on "Create Account" to create the app account.
+
+     ![Start](/images/digits/digits6.png){:width="300px"}
+- Here you can review the changes Twitter Plugin will make in your source code, you can review them and click on "Apply" to make these changes. (This is really the nice part of fabric plugin, that it automatically adds the code wherever required even the API keys are generated automatically).
+
+
+     ![Start](/images/digits/digits7.png){:width="300px"}
+- We are done with setup here, Just Run your app once to apply changes(here our app is rebuilt and gradle synchronizes the changes).
+
+
+     ![Start](/images/digits/digits8.png){:width="300px"}
+
+## Using the Digits Authentication.
+
+- If you followed the above method , you already have the following code in your MainActivity, or wherever it was placed in "Review code" step in last section.
+
+```java
+  TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+  Fabric.with(this, new TwitterCore(authConfig), new Digits());
 ```
-This ensures that whenever a SMS is received, this broadcast listener is sent the broadcast with SMS data.
 
-Create a simple interface **SmsListener.java** as follows:-
+Also two constants would have been added **TWITTER_KEY** and **TWITTER_SECRET** in the Activity.
+
+**Note:- If these are not added, please add themselves in the concerned activity where we are going to perform the Login action**.
+
+- Once the Auth configuration is set up in the activity from last step, let us continue to add a button in layout xml which will trigger the Digits authentication.
+ Add the following to activity_main.xml
+
+ ```
+
+        <com.digits.sdk.android.DigitsAuthButton
+            android:id="@+id/auth_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+ ```
+
+
+ - Create a callback AuthCallback (com.digits.sdk.android.AuthCallback) provided by Digits sdk as follows:-
 
 ```java
 
-    public interface SmsListener {
-            public void messageReceived(String messageText);
-    }
-
-```
-
-
-In our BroadcastReceiver, we will implement our core code.
-
-```java
-
-    public class SmsReceiver extends BroadcastReceiver {
-        
-        private static SmsListener mListener;
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle data  = intent.getExtras();
-
-            Object[] pdus = (Object[]) data.get("pdus");
-
-            for(int i=0;i<pdus.length;i++){
-                SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
-
-                String sender = smsMessage.getDisplayOriginatingAddress();
-                //You must check here if the sender is your provider and not another one with same text.
-
-                String messageBody = smsMessage.getMessageBody();
-
-                //Pass on the text to our listener.
-                mListener.messageReceived(messageBody);
+AuthCallback authCallback = new AuthCallback() {
+            @Override
+            public void success(DigitsSession session, String phoneNumber) {
+                Toast.makeText(MainActivity.this,"Success",Toast.LENGTH_LONG).show();
             }
 
-        }
-
-        public static void bindListener(SmsListener listener) {
-            mListener = listener;
-        }
-    }
-
-
-```
-Lets see what goes on behind the covers here,
-The intent contains PDU objects (Protocol Data Unit), which is a protocol for transfer of SMS messages in telecoms. We obtain an array of these messages that were sent to to our receiver by system.
-
-Iterating all these, we create a SmsMessage object using createFromPdu() method as shown.
-**smsMessage.getDisplayOriginatingAddress()** gives us the sender number.
-**smsMessage.getMessageBody()** gives us the message text.
-
-**Note that we have called mListener.messageReceived()** here as a callback when message is received.
-
-We are now ready with our core classes, lets implement this.
-
-```MainActivity.java
-
-    public class MainActivity extends AppCompatActivity {
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            SmsReceiver.bindListener(new SmsListener() {
-                @Override
-                public void messageReceived(String messageText) {
-                    Log.d("Text",messageText);
-                     Toast.makeText(MainActivity.this,"Message: "+messageText,Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-    }
+            @Override
+            public void failure(DigitsException exception) {
+                Toast.makeText(MainActivity.this,"Fail",Toast.LENGTH_LONG).show();
+            }
+        };
 
 ```
 
-This is our calling code (or "Driver" as it is called), it just binds the listener to our receiver by calling **SmsReceiver.bindListener** method and a custom implmentation telling what should be done when a message is received, this is the same method that is called in our BroadcastReceiver.
+This callback like any normal callback has two methods overriden for **success()** and **failure**, these will be called if the Phone number is verified successfully or not respectively.
 
-Thats it, we can see the toast
+- Attach this callback to the button we created in the layout
+
+```java
+
+        DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
+        digitsButton.setCallback(authCallback);
+
+```
+
+- That was it :), just this much of code, we have implemented the Sms Based Sign-in in our app, lets see it in action.
 
 
-![Sample App](/images/otp/screenshot.png){:width="250px"}
+Lets launch the app,
 
-# Package information and links.
+- 
+     ![Login button](/images/digits/digits9.png){:width="300px"}
 
-In case you want to skip this configuration and just want to use the functionality, I have written a package for the same, its easy to use , just include it in your project and follow instructions to integrate
+Here we can see the login button we insert in **Main Activity**, click the button
+    
 
-Github Link:-
-[Otp Reader Plugin](https://github.com/swarajsaaj/otpReader)
+- 
+     ![Enter number](/images/digits/digits10.png){:width="300px"}
+
+Select the Country and enter the phone number, after that click on "Send confirmation Code"
+
+- 
+     
+     ![Enter number](/images/digits/digits11.png){:width="300px"}
+
+ Digits will automatically detect if an SMS is received on phone, else you can enter it manually, if SMS is not received, there is an option **Call me** to receive the code by call
+- If entered correctly, the **sucess()** method in callback will be called , **failed()** in case authentication code fails.
+
+
+# Customization of Digits UI
+
+Digits provides customization for UI to match the Application's Theme and Colour pallete.
+
+Here is more on how to do that:- [https://docs.fabric.io/android/digits/theming.html](https://docs.fabric.io/android/digits/theming.html)
+
+
+**Digits of capable of much more than a phone based login, like User graphs and more auth based tasks, do checkout this awesome piece of work.**
+
+
+_Comment below if you have any questions regarding the procedure or anything_
 
 # Source code.
 
-[Download Source Code](https://github.com/swarajsaaj/sms_reader_blog_demo/archive/master.zip)
+[Download Source Code](https://github.com/swarajsaaj/twitter_digits_blog_demo/archive/master.zip)
+
+
+~swarajsaaj
