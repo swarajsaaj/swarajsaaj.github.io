@@ -15,7 +15,7 @@ jobs:
           sed -i '1s/^/[/' commits.json
           echo "]" >> commits.json
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: commit-metadata
           path: commits.json
