@@ -1,0 +1,21 @@
+name: Commit Metadata Dumper
+
+on:
+  workflow_dispatch:
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create commit metadata
+        run: |
+          git log --pretty=format:'{"sha":"%H","author":"%an","email":"%ae","date":"%ad","message":"%s"},' > commits.json
+          sed -i '$ s/,$//' commits.json
+          sed -i '1s/^/[/' commits.json
+          echo "]" >> commits.json
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: commit-metadata
+          path: commits.json
